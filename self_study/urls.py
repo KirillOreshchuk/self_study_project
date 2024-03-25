@@ -14,7 +14,7 @@ urlpatterns = [
     path('materials/', MaterialsListView.as_view(), name='materials_list'),
     path('materials/create/', MaterialsCreateView.as_view(), name='materials_create'),
     path('materials/<int:pk>/', MaterialsDetailView.as_view(), name='materials_detail'),
-    path('materials/update/<int:pk>/', MaterialsUpdateView.as_view(), name='Materials_update'),
+    path('materials/update/<int:pk>/', MaterialsUpdateView.as_view(), name='materials_update'),
     path('materials/delete/<int:pk>/', MaterialsDeleteView.as_view(), name='materials_delete'),
 ]
 
