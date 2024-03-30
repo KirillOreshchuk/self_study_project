@@ -29,9 +29,10 @@ class UserRegistrationView(CreateAPIView):
 
 class UserListView(ListAPIView):
     """Отображение списка пользователей"""
-    queryset = User.objects.all()
+    queryset = User.objects.all().order_by('id')
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated, IsStaffOrSuperuser]
+    ordering = 'id'
 
 
 class UserCreateView(CreateAPIView):
@@ -45,7 +46,7 @@ class UserDetailView(RetrieveAPIView):
     """Отображение одного пользователя"""
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated, IsCurrentUser]
+    permission_classes = [IsAuthenticated, IsCurrentUser | IsStaffOrSuperuser]
 
 
 class UserUpdateView(UpdateAPIView):
