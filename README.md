@@ -12,8 +12,15 @@
 
 ## Технологии
 
-    - python = 3.10  
+    - python
+    - postgreSQL 
+
+## Фреймворк
+
     - django = 5.0.3  
+
+## Библиотеки
+
     - psycopg2-binary = 2.9.9  
     - pillow = 10.2.0"  
     - python-dotenv = 1.0.1  
@@ -58,6 +65,14 @@ python3 manage.py csu
 ```bash
 python3 manage.py runserver
 ```
+
+
+## Заполнение базы данных
+
+Заполнение базы данных можно осуществить через Django Admin по ссылке, либо в Postman:
+
+[Django Admin](http://localhost:8000/admin/)
+
     
 ## Документация 
 

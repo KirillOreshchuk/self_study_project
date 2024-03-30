@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from self_study.models import Materials
 from self_study.paginators import SelfStudyPaginator
-from users.permissions import IsOwner
+from users.permissions import IsOwner, IsStaffOrSuperuser
 from self_study.serializers.materials import MaterialsSerializer
 
 
@@ -39,11 +39,11 @@ class MaterialsUpdateView(UpdateAPIView):
     """Изменение материала"""
     queryset = Materials.objects.all()
     serializer_class = MaterialsSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
+    permission_classes = [IsAuthenticated, IsOwner | IsStaffOrSuperuser]
 
 
 class MaterialsDeleteView(DestroyAPIView):
     """Удаление материала"""
     queryset = Materials.objects.all()
     serializer_class = MaterialsSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
+    permission_classes = [IsAuthenticated, IsOwner | IsStaffOrSuperuser]

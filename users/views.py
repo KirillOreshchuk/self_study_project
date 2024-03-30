@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 
 from users.models import User
-from users.permissions import IsCurrentUser
+from users.permissions import IsCurrentUser, IsStaffOrSuperuser
 from users.serializers import UserSerializer, UserRegistrationSerializer
 
 
@@ -31,31 +31,31 @@ class UserListView(ListAPIView):
     """Отображение списка пользователей"""
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsStaffOrSuperuser]
 
 
 class UserCreateView(CreateAPIView):
     """Создание нового пользователя"""
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsStaffOrSuperuser]
 
 
 class UserDetailView(RetrieveAPIView):
     """Отображение одного пользователя"""
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsCurrentUser]
 
 
 class UserUpdateView(UpdateAPIView):
     """Изменение пользователя"""
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated, IsCurrentUser]
+    permission_classes = [IsAuthenticated, IsCurrentUser | IsStaffOrSuperuser]
 
 
 class UserDeleteView(DestroyAPIView):
     """Удаление пользователя"""
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticated, IsCurrentUser]
+    permission_classes = [IsAuthenticated, IsCurrentUser | IsStaffOrSuperuser]

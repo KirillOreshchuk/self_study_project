@@ -17,3 +17,9 @@ class IsCurrentUser(BasePermission):
         if request.method in SAFE_METHODS:
             return True
         return obj.pk == request.user.pk
+
+
+class IsStaffOrSuperuser(BasePermission):
+    def has_permission(self, request, view):
+        if request.user.is_staff or request.user.is_superuser:
+            return True

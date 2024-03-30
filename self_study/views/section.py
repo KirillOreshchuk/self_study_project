@@ -4,7 +4,7 @@ from rest_framework.viewsets import ModelViewSet
 from self_study.models import Section
 from self_study.paginators import SelfStudyPaginator
 from self_study.serializers.section import SectionSerializer
-from users.permissions import IsOwner
+from users.permissions import IsOwner, IsStaffOrSuperuser
 
 
 class SectionViewSet(ModelViewSet):
@@ -24,5 +24,5 @@ class SectionViewSet(ModelViewSet):
         if self.action == 'create' or self.action == 'list' or self.action == 'retrieve':
             permission_classes = [IsAuthenticated]
         elif self.action == 'update' or self.action == 'destroy':
-            permission_classes = [IsAuthenticated, IsOwner]
+            permission_classes = [IsAuthenticated, IsOwner | IsStaffOrSuperuser]
         return [permission() for permission in permission_classes]
